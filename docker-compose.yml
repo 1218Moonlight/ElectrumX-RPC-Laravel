@@ -1,0 +1,33 @@
+version: "2"
+services:
+        portainer:
+                image: portainer/portainer:latest
+                container_name: portainer
+                command: -H unix:///var/run/docker.sock
+                network_mode: bridge
+                ports:
+                        - 9000:9000
+                volumes:
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        - portainer_data:/data
+                          
+        nginx:
+                image: nginx:1.13.5-alpine
+                container_name: nginx
+                ports:
+                        - 80:80
+                volumes:
+                        - ./contents/nginx/nginx_conf/default.conf:/etc/nginx/conf.d/default.conf
+                depends_on:
+                        - php
+
+        php:
+                build: ./contents/php
+                container_name: php
+                expose:
+                        - 9000
+                volumes:
+                        - ./contents/html:/var/www/html/
+
+volumes:
+        portainer_data:
