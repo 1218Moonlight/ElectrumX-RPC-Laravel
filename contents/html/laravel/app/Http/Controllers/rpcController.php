@@ -12,4 +12,8 @@ class rpcController extends Controller
     public function getinfo(){
         return view('rpc.getinfo');
     }
+
+    public function sessions(){
+        return view('rpc.sessions');
+    }
 }

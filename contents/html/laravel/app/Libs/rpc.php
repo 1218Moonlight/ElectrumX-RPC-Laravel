@@ -5,10 +5,12 @@ namespace App\Libs;
 class RPC
 {
     private $socket;
+    private $host = "ip";
+    private $port = "8000";
 
-    function __construct($host, $port, $errno = null, $errstr = null, $timeout = 3)
+    function __construct($errno = null, $errstr = null, $timeout = 3)
     {
-        $this->socket = fsockopen($host, $port, $errno, $errstr, $timeout);
+        $this->socket = fsockopen($this->host, $this->port, $errno, $errstr, $timeout);
     }
 
     public function send($method, $param = "")

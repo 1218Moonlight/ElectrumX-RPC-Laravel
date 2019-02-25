@@ -12,3 +12,4 @@
 */
 
 Route::get('/getinfo', 'rpcController@getinfo');
+Route::get('/sessions', 'rpcController@sessions');
